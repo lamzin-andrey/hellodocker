@@ -32,7 +32,8 @@
 </head>
 
 <body>
-	Hello Docker!! <?php echo date('Y-m-d H:i:s'); ?>
+	Hello Docker!! <?php echo date('Y-m-d H:i:s');
+	throw new Exception('Hello XDebug'); ?>
 </body>
 
 </html>
