@@ -18,8 +18,10 @@ services:
       - ./:/var/www/
       - ./docker/apache/php.ini:/usr/local/etc/php/php.ini
       - ./docker/apache/xdebug.so:/usr/local/lib/php/extensions/no-debug-non-zts-20131226/xdebug.so
+      - ./docker/apache/docker-php-ext-mongo.ini:/usr/local/etc/php/conf.d/docker-php-ext-mongo.ini
     networks:
       - backend
+      - clusternetwork
  
   db:
     image: "mysql:5.7"
@@ -32,6 +34,21 @@ services:
          MYSQL_PASSWORD: local
     networks:
       - backend
+
+  mongo:
+    image: mongo
+    #volumes:
+    #  - ./docker/db:/var/lib/mysql
+    #environment:
+    #      MYSQL_ROOT_PASSWORD: root
+    #      MYSQL_DATABASE: local
+    #      MYSQL_USER: local
+    #      MYSQL_PASSWORD: local
+    networks:
+      clusternetwork:
+        ipv4_address: 172.16.0.14
+    ports:
+      - "27017:27017"
  
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
@@ -48,4 +65,10 @@ networks:
   front:
     external:
       name: front
+  clusternetwork:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.0.0/24
   backend:
