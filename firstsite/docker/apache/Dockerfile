@@ -1,7 +1,8 @@
 FROM php:5-apache
  
 # PHP extensions
-# Строка из примерной статьи. Комментирую, потому что установить pecl install xdebug 17 02 2020 невозможно для 5-ой версии php, требует седьмую.
+# Строка из примерной статьи. (https://verstaem.com/devops/docker-php-development/?unapproved=1972&moderation-hash=8d5b070ff555fcfeccaa00887fd417ca#comment-1972)
+# Комментирую, потому что установить pecl install xdebug 17 02 2020 невозможно для 5-ой версии php, требует седьмую.
 #RUN apt-get update && apt-get install -y \
 #		libfreetype6-dev \
 #		libjpeg62-turbo-dev \
